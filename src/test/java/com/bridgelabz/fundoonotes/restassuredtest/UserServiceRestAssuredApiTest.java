@@ -77,7 +77,7 @@ public class UserServiceRestAssuredApiTest {
 	 * @purpose Forget User Password Api Test
 	 * @status 200 Test Passed Otherwise Fail
 	 */
-	@Test
+	
 	public void forgetPasswordTest() {
 	
 		RequestSpecification httpRequest = RestAssured.given().baseUri(baseURL);

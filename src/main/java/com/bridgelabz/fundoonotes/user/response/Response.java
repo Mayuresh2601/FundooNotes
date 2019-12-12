@@ -5,13 +5,13 @@ import lombok.Data;
 @Data
 public class Response {
 	
-	private String status;
+	private int status;
 	
 	private String message;
 	
 	private Object data;
 	
-	public Response(String status, String message, Object data) {
+	public Response(int status, String message, Object data) {
 		
 		this.status = status;
 		this.message = message;

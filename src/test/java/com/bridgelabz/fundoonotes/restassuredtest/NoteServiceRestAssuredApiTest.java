@@ -17,7 +17,7 @@ public class NoteServiceRestAssuredApiTest {
 	private String baseURL = "http://localhost:8080";
 	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbElkIjoiZGVtby5tYXl1cmVzaEBnbWFpbC5jb20ifQ.Yoym2VKSjnf4v2LdxGMln9eKdpG8CUUm9VQOILNjBlA";
 	private String noteId = "5df0880f57013002a4d298d1";
-	private String deletenoteId = "5df1e5235c56e5614628cbc2";
+	private String deletenoteId = "5df20c16a22e5c31acd190c7";
 	private String collaboratorEmail = "mssonar26@gmail.com";
   
 	

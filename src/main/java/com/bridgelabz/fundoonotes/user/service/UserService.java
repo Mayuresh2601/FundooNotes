@@ -54,6 +54,7 @@ public class UserService implements UserServiceI{
 	@Autowired
 	private Environment userEnvironment;
 	
+	
 	/**
 	 *Method: To Add New User into Database
 	 */
@@ -71,7 +72,7 @@ public class UserService implements UserServiceI{
 			
 			boolean isVerify = userEmail.contains(regdto.getEmail());
 			if(isVerify) {
-				return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("EMAILID_EXISTS"), null);
+				return new Response(404, userEnvironment.getProperty("EMAILID_EXISTS"), null);
 			}
 			
 			boolean passwordChecker = regdto.getPassword().equals(regdto.getConfirmPassword());
@@ -79,15 +80,15 @@ public class UserService implements UserServiceI{
 				user.setPassword(bCryptPasswordEncoder.encode(regdto.getPassword()));
 				user.setConfirmPassword(bCryptPasswordEncoder.encode(regdto.getConfirmPassword()));
 			} else {
-				return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("PASSWORD_NOT_MATCH"), null);
+				return new Response(404, userEnvironment.getProperty("PASSWORD_NOT_MATCH"), null);
 			}
 
 			String token = jwt.createToken(user.getEmail());
 			jms.sendMail(user.getEmail(), token);
 			userrepository.save(user);
-			return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Add_User"), userEnvironment.getProperty("ADD_USER"));
+			return new Response(200, userEnvironment.getProperty("Add_User"), userEnvironment.getProperty("ADD_USER"));
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
 
 	
@@ -96,8 +97,9 @@ public class UserService implements UserServiceI{
 	 */
 	@Override
 	public Response findUser(String token) {
+		
 		String emailId = jwt.getEmailId(token);
-		return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Find_User"), userrepository.findByEmail(emailId));
+		return new Response(200, userEnvironment.getProperty("Find_User"), userrepository.findByEmail(emailId));
 	}
 
 	
@@ -108,7 +110,7 @@ public class UserService implements UserServiceI{
 	public Response showUsers() {
 		
 		List<User> userlist = userrepository.findAll();
-		return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Show_Users"), userlist);
+		return new Response(200, userEnvironment.getProperty("Show_Users"), userlist);
 	}
 
 	
@@ -119,7 +121,7 @@ public class UserService implements UserServiceI{
 	public Response deleteUser(String id) {
 		
 		userrepository.deleteById(id);
-		return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Delete_User"), userEnvironment.getProperty("DELETE_USER"));
+		return new Response(200, userEnvironment.getProperty("Delete_User"), userEnvironment.getProperty("DELETE_USER"));
 	}
 
 	
@@ -137,9 +139,9 @@ public class UserService implements UserServiceI{
 			user.setMobileNumber(updatedto.getMobileNumber());
 				
 			userrepository.save(user);
-			return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Update_User"), userEnvironment.getProperty("UPDATE_USER"));
+			return new Response(200, userEnvironment.getProperty("Update_User"), userEnvironment.getProperty("UPDATE_USER"));
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
 	
 	
@@ -157,10 +159,10 @@ public class UserService implements UserServiceI{
 			if(isValid) {	
 				user.setValidate(true);
 				userrepository.save(user);
-				return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Login"), userEnvironment.getProperty("USER_LOGIN_SUCCESSFUL"));
+				return new Response(200, userEnvironment.getProperty("Login"), userEnvironment.getProperty("USER_LOGIN_SUCCESSFUL"));
 			}
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
 	
 	
@@ -182,9 +184,9 @@ public class UserService implements UserServiceI{
 			String token = jwt.createToken(user.getEmail());
 			System.out.println("Recieved token:::::::  "+token);
 			jms.sendMail(user.getEmail(), token);
-			return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("CHECK_YOUR_MAIL"), userEnvironment.getProperty("CHECK_YOUR_MAIL"));
+			return new Response(200, userEnvironment.getProperty("CHECK_YOUR_MAIL"), userEnvironment.getProperty("CHECK_YOUR_MAIL"));
 		}	
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
 
 	
@@ -204,12 +206,13 @@ public class UserService implements UserServiceI{
 			{
 				user.setPassword(bCryptPasswordEncoder.encode(resetdto.getNewPassword()));
 				userrepository.save(user);
-				return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Reset_Password"), userEnvironment.getProperty("PASSWORD_RESETED"));
+				return new Response(200, userEnvironment.getProperty("Reset_Password"), userEnvironment.getProperty("PASSWORD_RESETED"));
 			}
-			return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("PASSWORD_NOT_MATCHED"), null);
+			return new Response(404, userEnvironment.getProperty("PASSWORD_NOT_MATCHED"), null);
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
+	
 	
 	/**
 	 *Method: To Verify the EmailId and Password  
@@ -217,17 +220,17 @@ public class UserService implements UserServiceI{
 	@Override
 	public Response verify(String token) {
 
-			String email=jwt.getEmailId(token);
-			User user = userrepository.findByEmail(email);
-			
-			if(email.equals(user.getEmail()))
-			{
-				user.setValidate(true);
-				userrepository.save(user);
-				return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Verify_User"), userEnvironment.getProperty("VERIFIED_EMAILID_PASSWORD"));
-			}
-			return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		String email = jwt.getEmailId(token);
+		User user = userrepository.findByEmail(email);
+
+		if (email.equals(user.getEmail())) {
+			user.setValidate(true);
+			userrepository.save(user);
+			return new Response(200, userEnvironment.getProperty("Verify_User"),
+					userEnvironment.getProperty("VERIFIED_EMAILID_PASSWORD"));
 		}
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+	}
 
 
 	/**
@@ -255,16 +258,16 @@ public class UserService implements UserServiceI{
 		
 					fout.write(file.getBytes());
 					fout.close();
-					return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Upload_Profile_Picture"), userEnvironment.getProperty("PROFILE_PICTURE_UPLOADED"));
+					return new Response(200, userEnvironment.getProperty("Upload_Profile_Picture"), userEnvironment.getProperty("PROFILE_PICTURE_UPLOADED"));
 				}
 				
 				if(user.getProfilePicture().equals(path)) {
-					return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("PROFILE_PICTURE_EXISTED_EXCEPTION"), null);
+					return new Response(404, userEnvironment.getProperty("PROFILE_PICTURE_EXISTED_EXCEPTION"), null);
 				}
 			}
-			return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("FILE_INVALID"), null);
+			return new Response(404, userEnvironment.getProperty("FILE_INVALID"), null);
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
 
 
@@ -288,11 +291,11 @@ public class UserService implements UserServiceI{
 				String path = "/home/admin1/Documents/" + file.getOriginalFilename();
 				
 				if(photo == null) {
-					return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("PROFILE_NOT_FOUND_EXCEPTION"), null);
+					return new Response(404, userEnvironment.getProperty("PROFILE_NOT_FOUND_EXCEPTION"), null);
 				}
 				
 				if(user.getProfilePicture().equals(path)) {
-					return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("PROFILE_PICTURE_EXISTED_EXCEPTION"), null);
+					return new Response(404, userEnvironment.getProperty("PROFILE_PICTURE_EXISTED_EXCEPTION"), null);
 				}
 				
 				user.setProfilePicture(path);
@@ -300,11 +303,11 @@ public class UserService implements UserServiceI{
 	
 				fout.write(file.getBytes());
 				fout.close();
-				return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Update_Profile_Picture"), userEnvironment.getProperty("PROFILE_PICTURE_UPDATED"));
+				return new Response(200, userEnvironment.getProperty("Update_Profile_Picture"), userEnvironment.getProperty("PROFILE_PICTURE_UPDATED"));
 			}
-			return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("FILE_INVALID"), null);
+			return new Response(404, userEnvironment.getProperty("FILE_INVALID"), null);
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
 	
 	
@@ -320,15 +323,13 @@ public class UserService implements UserServiceI{
 		if(email.equals(user.getEmail())) {
 			
 			if(user.getProfilePicture() == null) {
-				return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("PROFILE_PICTURE_REMOVE_EXCEPTION"), null);
+				return new Response(404, userEnvironment.getProperty("PROFILE_PICTURE_REMOVE_EXCEPTION"), null);
 			}
 			
 			user.setProfilePicture(null);
 			userrepository.save(user);
-			return new Response(userEnvironment.getProperty("Status_200"), userEnvironment.getProperty("Remove_Profile_Picture"), userEnvironment.getProperty("PROFILE_PICTURE_DELETED"));
+			return new Response(200, userEnvironment.getProperty("Remove_Profile_Picture"), userEnvironment.getProperty("PROFILE_PICTURE_DELETED"));
 		}
-		return new Response(userEnvironment.getProperty("Status_404"), userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
-
 }
-

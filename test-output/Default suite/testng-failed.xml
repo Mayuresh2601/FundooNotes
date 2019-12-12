@@ -5,7 +5,7 @@
     <classes>
       <class name="com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest">
         <methods>
-          <include name="updateLabelApiTest"/>
+          <include name="deleteLabelApiTest"/>
         </methods>
       </class> <!-- com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest -->
     </classes>

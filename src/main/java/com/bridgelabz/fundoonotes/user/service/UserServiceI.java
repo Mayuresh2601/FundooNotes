@@ -1,7 +1,6 @@
 package com.bridgelabz.fundoonotes.user.service;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,7 +9,6 @@ import com.bridgelabz.fundoonotes.user.dto.LoginDTO;
 import com.bridgelabz.fundoonotes.user.dto.RegisterDTO;
 import com.bridgelabz.fundoonotes.user.dto.ResetDTO;
 import com.bridgelabz.fundoonotes.user.dto.UpdateDTO;
-import com.bridgelabz.fundoonotes.user.model.User;
 import com.bridgelabz.fundoonotes.user.response.Response;
 
 public interface UserServiceI {

@@ -1,37 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+<testng-results ignored="0" total="30" passed="30" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2019-12-12T13:16:44 IST" name="Default suite" finished-at="2019-12-12T13:16:45 IST" duration-ms="1056">
+  <suite started-at="2019-12-12T15:14:52 IST" name="Default suite" finished-at="2019-12-12T15:14:54 IST" duration-ms="2015">
     <groups>
     </groups>
-    <test started-at="2019-12-12T13:16:44 IST" name="Default test" finished-at="2019-12-12T13:16:45 IST" duration-ms="1056">
+    <test started-at="2019-12-12T15:14:52 IST" name="Default test" finished-at="2019-12-12T15:14:54 IST" duration-ms="2015">
+      <class name="com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest">
+        <test-method signature="addUserApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:52 IST" name="addUserApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="1057" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserApiTest -->
+        <test-method signature="deleteUserApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:53 IST" name="deleteUserApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="36" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserApiTest -->
+        <test-method signature="findUserApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:53 IST" name="findUserApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="19" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- findUserApiTest -->
+        <test-method signature="loginApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:53 IST" name="loginApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="118" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginApiTest -->
+        <test-method signature="resetPasswordTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:53 IST" name="resetPasswordTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="105" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetPasswordTest -->
+        <test-method signature="showUsersApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:53 IST" name="showUsersApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- showUsersApiTest -->
+        <test-method signature="updateUserApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest@49c386c8]" started-at="2019-12-12T15:14:53 IST" name="updateUserApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="15" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateUserApiTest -->
+      </class> <!-- com.bridgelabz.fundoonotes.restassuredtest.UserServiceRestAssuredApiTest -->
       <class name="com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest">
-        <test-method signature="addLabelApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@163e4e87]" started-at="2019-12-12T13:16:44 IST" name="addLabelApiTest" finished-at="2019-12-12T13:16:45 IST" duration-ms="906" status="PASS">
+        <test-method signature="addLabelApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@56528192]" started-at="2019-12-12T15:14:53 IST" name="addLabelApiTest" finished-at="2019-12-12T15:14:53 IST" duration-ms="17" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addLabelApiTest -->
-        <test-method signature="addLabelToNoteApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@163e4e87]" started-at="2019-12-12T13:16:45 IST" name="addLabelToNoteApiTest" finished-at="2019-12-12T13:16:45 IST" duration-ms="28" status="PASS">
+        <test-method signature="addLabelToNoteApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@56528192]" started-at="2019-12-12T15:14:53 IST" name="addLabelToNoteApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="37" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addLabelToNoteApiTest -->
-        <test-method signature="deleteLabelApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@163e4e87]" started-at="2019-12-12T13:16:45 IST" name="deleteLabelApiTest" finished-at="2019-12-12T13:16:45 IST" duration-ms="25" status="PASS">
+        <test-method signature="deleteLabelApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@56528192]" started-at="2019-12-12T15:14:54 IST" name="deleteLabelApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="12" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- deleteLabelApiTest -->
-        <test-method signature="findLabelByIdApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@163e4e87]" started-at="2019-12-12T13:16:45 IST" name="findLabelByIdApiTest" finished-at="2019-12-12T13:16:45 IST" duration-ms="21" status="PASS">
+        <test-method signature="findLabelByIdApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@56528192]" started-at="2019-12-12T15:14:54 IST" name="findLabelByIdApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="12" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- findLabelByIdApiTest -->
-        <test-method signature="showLabelsApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@163e4e87]" started-at="2019-12-12T13:16:45 IST" name="showLabelsApiTest" finished-at="2019-12-12T13:16:45 IST" duration-ms="20" status="PASS">
+        <test-method signature="showLabelsApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@56528192]" started-at="2019-12-12T15:14:54 IST" name="showLabelsApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="10" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- showLabelsApiTest -->
-        <test-method signature="updateLabelApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@163e4e87]" started-at="2019-12-12T13:16:45 IST" name="updateLabelApiTest" finished-at="2019-12-12T13:16:45 IST" duration-ms="23" status="PASS">
+        <test-method signature="updateLabelApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest@56528192]" started-at="2019-12-12T15:14:54 IST" name="updateLabelApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="16" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- updateLabelApiTest -->
       </class> <!-- com.bridgelabz.fundoonotes.restassuredtest.LabelServiceRestAssuredApiTest -->
+      <class name="com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest">
+        <test-method signature="addCollaboratorApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="addCollaboratorApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addCollaboratorApiTest -->
+        <test-method signature="addNoteApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="addNoteApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="24" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addNoteApiTest -->
+        <test-method signature="addReminderApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="addReminderApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="111" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addReminderApiTest -->
+        <test-method signature="archiveApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="archiveApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="29" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- archiveApiTest -->
+        <test-method signature="deleteNoteApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="deleteNoteApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="26" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteNoteApiTest -->
+        <test-method signature="editReminderApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="editReminderApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- editReminderApiTest -->
+        <test-method signature="findNoteApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="findNoteApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="16" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- findNoteApiTest -->
+        <test-method signature="isPinApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="isPinApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="28" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isPinApiTest -->
+        <test-method signature="isTrashApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="isTrashApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="45" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isTrashApiTest -->
+        <test-method signature="removeCollaboratorApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="removeCollaboratorApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="26" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- removeCollaboratorApiTest -->
+        <test-method signature="removeReminderApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="removeReminderApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="23" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- removeReminderApiTest -->
+        <test-method signature="showNotesApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="showNotesApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- showNotesApiTest -->
+        <test-method signature="sortNoteByDateAscApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="sortNoteByDateAscApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sortNoteByDateAscApiTest -->
+        <test-method signature="sortNoteByDateDescApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="sortNoteByDateDescApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="13" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sortNoteByDateDescApiTest -->
+        <test-method signature="sortNoteByTitleAscApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="sortNoteByTitleAscApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sortNoteByTitleAscApiTest -->
+        <test-method signature="sortNoteByTitleDescApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="sortNoteByTitleDescApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="8" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- sortNoteByTitleDescApiTest -->
+        <test-method signature="updateNoteApiTest()[pri:0, instance:com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest@6e0dec4a]" started-at="2019-12-12T15:14:54 IST" name="updateNoteApiTest" finished-at="2019-12-12T15:14:54 IST" duration-ms="25" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateNoteApiTest -->
+      </class> <!-- com.bridgelabz.fundoonotes.restassuredtest.NoteServiceRestAssuredApiTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -69,9 +69,9 @@ public class NoteService implements NoteServiceI{
 			User user = userrepository.findByEmail(email);
 			user.getNotelist().add(note);
 			userrepository.save(user);
-			return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Create_Note"), noteEnvironment.getProperty("CREATE_NOTE"));
+			return new Response(200, noteEnvironment.getProperty("Create_Note"), noteEnvironment.getProperty("CREATE_NOTE"));
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -102,11 +102,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 				user.getNotelist().add(noteupdate);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Update_Note"), noteEnvironment.getProperty("UPDATE_NOTE"));
+				return new Response(200, noteEnvironment.getProperty("Update_Note"), noteEnvironment.getProperty("UPDATE_NOTE"));
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UPDATE_NOTE_NULL"), null);
+			return new Response(404, noteEnvironment.getProperty("UPDATE_NOTE_NULL"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -125,9 +125,9 @@ public class NoteService implements NoteServiceI{
 			
 			user.getNotelist().remove(note);
 			userrepository.save(user);
-			return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Delete_Note"), noteEnvironment.getProperty("DELETE_NOTE"));
+			return new Response(200, noteEnvironment.getProperty("Delete_Note"), noteEnvironment.getProperty("DELETE_NOTE"));
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -141,9 +141,9 @@ public class NoteService implements NoteServiceI{
 		
 		if(email != null) {
 			Optional<Note> note =  noterepository.findById(noteid);
-			return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Find_Note"), note);
+			return new Response(200, noteEnvironment.getProperty("Find_Note"), note);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 		
 	}
 
@@ -180,11 +180,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note1.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("UPDATE_Pin"), note.isPin());
+				return new Response(200, noteEnvironment.getProperty("UPDATE_Pin"), note.isPin());
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -209,11 +209,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note1.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("UPDATE_TRASH"), note.isTrash());
+				return new Response(200, noteEnvironment.getProperty("UPDATE_TRASH"), note.isTrash());
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -240,11 +240,11 @@ public class NoteService implements NoteServiceI{
 				System.out.println("After Deletion -> "+user.getNotelist());
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("UPDATE_ARCHIEVE"), note.isArchieve());
+				return new Response(200, noteEnvironment.getProperty("UPDATE_ARCHIEVE"), note.isArchieve());
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 
@@ -311,11 +311,11 @@ public class NoteService implements NoteServiceI{
 				
 				boolean checker = note.getCollaboratorList().contains(email);
 				if(checker) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("COLLABORATOR_EXISTS"), null);
+					return new Response(404, noteEnvironment.getProperty("COLLABORATOR_EXISTS"), null);
 				}
 				
 				if(email.equals(note.getEmailId())) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("COLLABORATOR_CANNOT_ADD"), null);
+					return new Response(404, noteEnvironment.getProperty("COLLABORATOR_CANNOT_ADD"), null);
 				}
 				
 				note.getCollaboratorList().add(email);
@@ -324,11 +324,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Add_Collaborator"), noteEnvironment.getProperty("CREATE_COLLABORATOR"));
+				return new Response(200, noteEnvironment.getProperty("Add_Collaborator"), noteEnvironment.getProperty("CREATE_COLLABORATOR"));
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -356,11 +356,11 @@ public class NoteService implements NoteServiceI{
 				
 				boolean isValid = note.getCollaboratorList().contains(collaboratordto.getCollaboratorEmail());
 				if(isValid) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("COLLABORATOR_EXISTS"), null);
+					return new Response(404, noteEnvironment.getProperty("COLLABORATOR_EXISTS"), null);
 				}
 				
 				if(collaboratordto.getCollaboratorEmail().equals(note.getEmailId())) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("COLLABORATOR_CANNOT_ADD"), null);
+					return new Response(404, noteEnvironment.getProperty("COLLABORATOR_CANNOT_ADD"), null);
 				}
 				
 				note.getCollaboratorList().add(collaboratordto.getCollaboratorEmail());
@@ -369,11 +369,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Add_Collaborator"), noteEnvironment.getProperty("CREATE_COLLABORATOR"));
+				return new Response(200, noteEnvironment.getProperty("Add_Collaborator"), noteEnvironment.getProperty("CREATE_COLLABORATOR"));
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 	
 	
@@ -390,7 +390,7 @@ public class NoteService implements NoteServiceI{
 			if(noteid != null) {
 				
 				if(!note.getCollaboratorList().contains(collaboratorEmailId)) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("COLLABORATOR_NOT_EXISTS"), null);
+					return new Response(404, noteEnvironment.getProperty("COLLABORATOR_NOT_EXISTS"), null);
 				}
 				
 				note.getCollaboratorList().remove(collaboratorEmailId);
@@ -399,11 +399,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Remove_Collaborator"), noteEnvironment.getProperty("REMOVE_COLLABORATOR"));
+				return new Response(200, noteEnvironment.getProperty("Remove_Collaborator"), noteEnvironment.getProperty("REMOVE_COLLABORATOR"));
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 
@@ -433,17 +433,16 @@ public class NoteService implements NoteServiceI{
 					user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 					user.getNotelist().add(note);
 					userrepository.save(user);
-					return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Add_Reminder"), noteEnvironment.getProperty("ADD_REMINDER"));
+					return new Response(200, noteEnvironment.getProperty("Add_Reminder"), noteEnvironment.getProperty("ADD_REMINDER"));
 				}
 				
 				if(note.getReminder().equals(date)) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("REMINDER_EXISTS_EXCEPTION"), null);
+					return new Response(404, noteEnvironment.getProperty("REMINDER_EXISTS_EXCEPTION"), null);
 				}
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
-		
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 
 	
@@ -466,11 +465,11 @@ public class NoteService implements NoteServiceI{
 				String existingDate = note.getReminder();
 				
 				if(existingDate == null) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("REMINDER_NOT_FOUND_EXCEPTION"), null);
+					return new Response(404, noteEnvironment.getProperty("REMINDER_NOT_FOUND_EXCEPTION"), null);
 				}
 				
 				if(note.getReminder().equals(date)) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("REMINDER_EXISTS_EXCEPTION"), null);
+					return new Response(404, noteEnvironment.getProperty("REMINDER_EXISTS_EXCEPTION"), null);
 				}
 				
 				note.setReminder(date);
@@ -479,11 +478,11 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Edit_Reminder"), noteEnvironment.getProperty("EDIT_REMINDER"));
+				return new Response(200, noteEnvironment.getProperty("Edit_Reminder"), noteEnvironment.getProperty("EDIT_REMINDER"));
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
 	
 	
@@ -501,7 +500,7 @@ public class NoteService implements NoteServiceI{
 			if(note.getId().equals(noteid)) {
 			
 				if(note.getReminder() == null) {
-					return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("REMINDER_REMOVE_EXCEPTION"), null);
+					return new Response(404, noteEnvironment.getProperty("REMINDER_REMOVE_EXCEPTION"), null);
 				}
 				
 				note.setReminder(null);
@@ -510,11 +509,10 @@ public class NoteService implements NoteServiceI{
 				user.getNotelist().removeIf(data -> data.getId().equals(note.getId()));
 				user.getNotelist().add(note);
 				userrepository.save(user);
-				return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Remove_Reminder"), noteEnvironment.getProperty("REMOVE_REMINDER"));
+				return new Response(200, noteEnvironment.getProperty("Remove_Reminder"), noteEnvironment.getProperty("REMOVE_REMINDER"));
 			}
-			return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
+			return new Response(404, noteEnvironment.getProperty("NOTE_ID_NOT_FOUND"), null);
 		}
-		return new Response(noteEnvironment.getProperty("Status_404"), noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
+		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
 	}
-
 }

@@ -95,7 +95,7 @@ public class NoteController {
 	public Response showNotes() {
 		
 		List<Note> note = noteService.showNotes();
-		return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Show_Notes"), note);
+		return new Response(200, noteEnvironment.getProperty("Show_Notes"), note);
 	}
 
 	
@@ -145,7 +145,7 @@ public class NoteController {
 	public Response sortNoteByTitleAsc() {
 		
 		List<?> list = noteService.sortNoteByTitleAsc();
-		return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Sort_Note_By_Title_Asc"), list);
+		return new Response(200, noteEnvironment.getProperty("Sort_Note_By_Title_Asc"), list);
 	}
 	
 	
@@ -156,7 +156,7 @@ public class NoteController {
 	public Response sortNoteByTitleDesc() {
 		
 		List<?> list = noteService.sortNoteByTitleDesc();
-		return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Sort_Note_By_Title_Desc"), list);
+		return new Response(200, noteEnvironment.getProperty("Sort_Note_By_Title_Desc"), list);
 	}
 	
 	
@@ -167,7 +167,7 @@ public class NoteController {
 	public Response sortNoteByDateAsc() {
 		
 		List<?> list = noteService.sortNoteByDateAsc();
-		return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Sort_Note_By_Date_Asc"), list);
+		return new Response(200, noteEnvironment.getProperty("Sort_Note_By_Date_Asc"), list);
 	}
 	
 	
@@ -178,7 +178,7 @@ public class NoteController {
 	public Response sortNoteByDateDesc() {
 		
 		List<?> list = noteService.sortNoteByDateDesc();
-		return new Response(noteEnvironment.getProperty("Status_200"), noteEnvironment.getProperty("Sort_Note_By_Date_Desc"), list);
+		return new Response(200, noteEnvironment.getProperty("Sort_Note_By_Date_Desc"), list);
 	}
 	
 	

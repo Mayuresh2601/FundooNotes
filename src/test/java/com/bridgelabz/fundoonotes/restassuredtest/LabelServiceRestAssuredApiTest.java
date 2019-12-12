@@ -18,7 +18,7 @@ public class LabelServiceRestAssuredApiTest {
 	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbElkIjoiZGVtby5tYXl1cmVzaEBnbWFpbC5jb20ifQ.Yoym2VKSjnf4v2LdxGMln9eKdpG8CUUm9VQOILNjBlA";
 	private String noteId = "5df0880f57013002a4d298d1";
 	private String labelId = "5df088a357013002a4d298d4";
-	private String deletelabelId = "5df1f0655c56e5614628cbcd";
+	private String deletelabelId = "5df20c15a22e5c31acd190c6";
 
 	
 	/**
