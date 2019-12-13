@@ -87,15 +87,16 @@ public class LabelService implements LabelServiceI{
 				label.setEditDate(date);
 				labelrepository.save(label);
 
-				//Extra Code 
-//				n.getLabellist().removeIf(data -> data.getId().equals(labelid));
-//				n.getLabellist().add(label);
-//				noterepository.save(n);
-//					
-//				User user = userrepository.findByEmail(email);
-//				user.getNotelist().removeIf(data -> data.getId().equals(n.getId()));
-//				user.getNotelist().add(n);
-//				userrepository.save(user);
+				/* Extra Code 
+				n.getLabellist().removeIf(data -> data.getId().equals(labelid));
+				n.getLabellist().add(label);
+				noterepository.save(n);
+					
+				User user = userrepository.findByEmail(email);
+				user.getNotelist().removeIf(data -> data.getId().equals(n.getId()));
+				user.getNotelist().add(n);
+				userrepository.save(user);
+				*/
 				return new Response(200, labelEnvironment.getProperty("Update_Label"), labelEnvironment.getProperty("UPDATE_LABEL"));
 			}
 			return new Response(404, labelEnvironment.getProperty("LABEL_ID_NOT_FOUND"), null);
@@ -117,16 +118,17 @@ public class LabelService implements LabelServiceI{
 			if (label.getId().equalsIgnoreCase(labelid)) {
 				labelrepository.deleteById(labelid);
 
-				//Extra Code
-//				List<Note> notelist = noteService.showNotes();
-//				Note note = notelist.stream().filter(data -> data.getEmailId().equals(email)).findAny().orElse(null);
-//				n.getLabellist().remove(label);
-//				noterepository.save(n);
-//
-//				User user = userrepository.findByEmail(email);
-//				user.getNotelist().removeIf(data -> data.getId().equals(n.getId()));
-//				user.getNotelist().add(n);
-//				userrepository.save(user);
+				/* Extra Code 
+				List<Note> notelist = noteService.showNotes();
+				Note note = notelist.stream().filter(data -> data.getEmailId().equals(email)).findAny().orElse(null);
+				n.getLabellist().remove(label);
+				noterepository.save(n);
+
+				User user = userrepository.findByEmail(email);
+				user.getNotelist().removeIf(data -> data.getId().equals(n.getId()));
+				user.getNotelist().add(n);
+				userrepository.save(user);
+				*/
 				return new Response(200, labelEnvironment.getProperty("Delete_Label"), labelEnvironment.getProperty("DELETE_LABEL"));
 			}
 			return new Response(404, labelEnvironment.getProperty("LABEL_ID_NOT_FOUND"), null);

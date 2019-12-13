@@ -63,7 +63,8 @@ public class LabelServiceTests {
 	@Mock
 	private Environment labelEnv;
 	
-	/* Used Objects */
+	
+	/* Parameters Used */
 	private Label label = new Label();
 	private Note note = new Note();
 	private User user = new User();
@@ -111,19 +112,20 @@ public class LabelServiceTests {
 		assertTrue(label.getId().equals(labelid));
 		when(labelRepo.save(label)).thenReturn(label);
 		
-		//when(noteService.showNotes()).thenReturn(notelist);
-		//notelist.stream().filter(data -> data.getEmailId().equals(email)).findAny().orElse(null);
-//		assertThat(note.getLabellist().removeIf(data -> data.getId().equals(labelid)));
-//		note.getLabellist().remove(label);
-//		when(noteRepo.save(note)).thenReturn(note);
-//		
-//		when(userRepo.findByEmail(email)).thenReturn(user);
-//		assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
-//		user.getNotelist().add(note);
-//		when(userRepo.save(user)).thenReturn(user);
+		/* Extra Code 
+		assertThat(note.getLabellist().removeIf(data -> data.getId().equals(labelid)));
+		note.getLabellist().remove(label);
+		when(noteRepo.save(note)).thenReturn(note);
+		
+		when(userRepo.findByEmail(email)).thenReturn(user);
+		assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
+		user.getNotelist().add(note);
+		when(userRepo.save(user)).thenReturn(user);
+		*/
 		
 		Response response = labelService.updateLabel(labelid, token, labeldto);
 		assertEquals(200, response.getStatus());
+		
 		
 	}
 	
@@ -146,6 +148,7 @@ public class LabelServiceTests {
 		assertTrue(label.getId().equals(labelid));
 		labelRepo.deleteById(labelid);
 
+		/* Extra Code 
 		assertThat(note.getLabellist().removeIf(data -> data.getId().equals(labelid)));
 		note.getLabellist().remove(label);
 		when(noteRepo.save(note)).thenReturn(note);
@@ -154,6 +157,7 @@ public class LabelServiceTests {
 		assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
 		user.getNotelist().add(note);
 		when(userRepo.save(user)).thenReturn(user);
+		*/
 		
 		Response response = labelService.deleteLabel(labelid, token);
 		assertEquals(200, response.getStatus());
@@ -190,15 +194,10 @@ public class LabelServiceTests {
 	/**
 	 * Method: Test Case to Add Label to Note
 	 */
-	
 	public void testAddLabelToNote() {
 
 		user.setEmail(email);
-		note.setId(noteid);
-		note.setEmailId(noteid);
-		label.setEmail(labelid);
-		label.setId(labelid);
-
+	
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 		assertTrue(email.equals(user.getEmail()));
@@ -206,18 +205,15 @@ public class LabelServiceTests {
 		when(noteRepo.findByEmailId(email)).thenReturn(notelist);
 		when(labelRepo.findById(labelid)).thenReturn(optionalLabel);
 		
-//		assertTrue(note.getId().equals(noteid));
-//		assertTrue(label.getId().equals(labelid));
-		
 		label.getNotelist().add(note);
 		when(labelRepo.save(label)).thenReturn(label);
 		
 		note.getLabellist().add(label);
 		when(noteRepo.save(note)).thenReturn(note);
 		
-//		assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
-//		user.getNotelist().add(note);
-//		when(userRepo.save(user)).thenReturn(user);
+		assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
+		user.getNotelist().add(note);
+		when(userRepo.save(user)).thenReturn(user);
 		
 		Response response = labelService.addLabelToNote(noteid, labelid, token);
 		assertEquals(200, response.getStatus());

@@ -39,5 +39,4 @@ public class Jwt {
 		Claim claim=JWT.require(Algorithm.HMAC256(SECRET_KEY)).build().verify(token).getClaim("emailId");
 		return claim.asString();
 	}
-
 }

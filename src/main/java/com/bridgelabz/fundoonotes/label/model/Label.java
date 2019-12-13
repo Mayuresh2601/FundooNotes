@@ -32,6 +32,6 @@ public class Label {
 	private String editDate;
 	
 	@DBRef
-	List<Note> notelist = new ArrayList<>();
+	private List<Note> notelist = new ArrayList<>();
 
 }

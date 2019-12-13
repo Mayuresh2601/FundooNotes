@@ -33,5 +33,4 @@ public class Jms {
 		
 		javamailsender.send(mail);
 	}
-
 }

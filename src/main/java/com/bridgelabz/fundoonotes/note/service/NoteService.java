@@ -144,7 +144,6 @@ public class NoteService implements NoteServiceI{
 			return new Response(200, noteEnvironment.getProperty("Find_Note"), note);
 		}
 		return new Response(404, noteEnvironment.getProperty("UNAUTHORIZED_USER_EXCEPTION"), null);
-		
 	}
 
 	

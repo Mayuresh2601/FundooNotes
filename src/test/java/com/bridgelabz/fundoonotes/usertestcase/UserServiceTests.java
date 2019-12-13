@@ -83,7 +83,7 @@ public class UserServiceTests {
 	private Environment userEnvironment;
 
 	
-	/* Used Objects */
+	/* Parameters Used  */
 	private User user = new User();
 	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbElkIjoibXNzb25hcjI2QGdtYWlsLmNvbSJ9.PnmJiMaZVOJ03T5WgZU8k0VNEK-Osgj-mCtWe2whkUQ";
 	private String email = "mssonar26@gmail.com";
@@ -105,8 +105,8 @@ public class UserServiceTests {
 		regdto.setEmail(email);
 		regdto.setPassword(password);
 		regdto.setConfirmPassword(confirmPassword);
-		regdto.setEmail(email);
 
+		// Mock Object Defined
 		when(mapper.map(regdto, User.class)).thenReturn(user);
 		assertFalse(userEmail.contains(regdto.getEmail()));
 		assertTrue(regdto.getPassword().equals(regdto.getConfirmPassword()));
@@ -129,6 +129,7 @@ public class UserServiceTests {
 	@Test
 	public void testFindUser() {
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 
@@ -143,6 +144,7 @@ public class UserServiceTests {
 	@Test
 	public void testDeleteUser() {
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findById(email)).thenReturn(optionalUser);
 
@@ -156,11 +158,12 @@ public class UserServiceTests {
 	 */
 	public void testUpdateUser() {
 
-		user.setEmail(email);
-		when(updatedto.getFirstName()).thenReturn("Mayur");
-		when(updatedto.getLastName()).thenReturn("Sonar");
-		when(updatedto.getMobileNumber()).thenReturn("9872348291");
-
+		updatedto = new UpdateDTO();
+		updatedto.setFirstName("Mayur");
+		updatedto.setFirstName("Sonar");
+		updatedto.setFirstName("9872348291");
+		
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(mapper.map(updatedto, User.class)).thenReturn(user);
 		when(userRepo.save(user)).thenReturn(user);
@@ -179,6 +182,7 @@ public class UserServiceTests {
 		logindto.setEmail(email);
 		logindto.setPassword(password);
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(mapper.map(logindto, User.class)).thenReturn(user);
 		when(userRepo.findByEmail(email)).thenReturn(user);
@@ -196,6 +200,7 @@ public class UserServiceTests {
 	 */
 	@Test
 	public void testForgetPassword() {
+		// Mock Object Defined
 		when(mapper.map(forgetdto, User.class)).thenReturn(user);
 		when(jwt.createToken(email)).thenReturn(token);
 
@@ -212,10 +217,9 @@ public class UserServiceTests {
 
 		user.setEmail(email);
 		resetdto.setNewPassword(password);
-		;
 		resetdto.setConfirmPassword(confirmPassword);
-		;
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 		assertTrue(email.equals(user.getEmail()));
@@ -241,6 +245,7 @@ public class UserServiceTests {
 
 		user.setEmail(email);
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 		assertTrue(email.equals(user.getEmail()));
@@ -253,7 +258,6 @@ public class UserServiceTests {
 
 	/**
 	 * Method: Test Case to Upload Profile Picture
-	 * 
 	 * @throws IOException
 	 */
 	@Test
@@ -261,6 +265,7 @@ public class UserServiceTests {
 
 		user.setEmail(email);
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 		assertTrue(email.equals(user.getEmail()));
@@ -275,13 +280,13 @@ public class UserServiceTests {
 	
 	/**
 	 * Method: Test Case to Update Profile Picture
-	 * 
 	 * @throws IOException
 	 */
 	public void testUpdateProfilePicture() throws IOException {
 
 		user.setEmail(email);
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 		assertTrue(email.equals(user.getEmail()));
@@ -304,6 +309,8 @@ public class UserServiceTests {
 
 		user.setEmail(email);
 		user.setProfilePicture(profilePicture);
+		
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(email);
 		when(userRepo.findByEmail(email)).thenReturn(user);
 		assertTrue(email.equals(user.getEmail()));

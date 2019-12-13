@@ -18,6 +18,4 @@ public interface NoteRepositoryI extends MongoRepository<Note, String>{
 	
 	public List<Note> findByEmailId(String email);
 
-	public Object findByIdAndEmailId(String noteId, String emailId);
-
 }

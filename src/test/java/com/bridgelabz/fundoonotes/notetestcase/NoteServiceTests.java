@@ -58,14 +58,16 @@ public class NoteServiceTests {
 	private Environment noteEnv;
 	
 	
-	/* Used Objects */
+	/* Parameters Used */
 	private Note note = new Note();
+	private NoteDTO noteDTO = new NoteDTO();
+	private Optional<Note> optionalNote = Optional.of(note);
 	private String noteId = "5dea5e42836c8f441d888498";
 	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbElkIjoibXNzb25hcjI2QGdtYWlsLmNvbSJ9.PnmJiMaZVOJ03T5WgZU8k0VNEK-Osgj-mCtWe2whkUQ";
 	private String emailId = "mssonar26@gmail.com";
-	private String collaboratorEmail = "demo.mayuresh@gmail.com";
-	private NoteDTO noteDTO = new NoteDTO();
-	private Optional<Note> optionalNote = Optional.of(note);
+	private String collaboratorEmailId = "demo.mayuresh@gmail.com";
+	private String reminder = "2019/12/31 24:00:00";
+	private int year=2021,month=6,day=12,hour=18,minute=17,second=57;
 	
 	
 	/**
@@ -74,6 +76,7 @@ public class NoteServiceTests {
 	@Test
 	public void testCreateNote() {
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(emailId);
 		when(mapper.map(noteDTO, Note.class)).thenReturn(note);
 		when(noteRepo.save(note)).thenReturn(note);
@@ -96,7 +99,7 @@ public class NoteServiceTests {
 		NoteDTO noteDTO = new NoteDTO();
 		noteDTO.setTitle("Secrets Can't Share");
 		noteDTO.setDescription("My Secrets are my secrets none of your secrets");
-		
+	
 		note.setId(noteId);
 		note.setEmailId(emailId);
 		
@@ -128,6 +131,7 @@ public class NoteServiceTests {
 		note.setId(noteId);
 		note.setEmailId(emailId);
 		
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(emailId);
 		when(userRepo.findByEmail(emailId)).thenReturn(user);
 		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
@@ -147,6 +151,7 @@ public class NoteServiceTests {
 	@Test
 	public void testfindNoteById() {
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(emailId);
 		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
 
@@ -174,7 +179,10 @@ public class NoteServiceTests {
 	public void TestisPin() {
 
 		note.setPin(true);
-		when(noteRepo.findByIdAndEmailId(noteId, emailId)).thenReturn(note);
+		
+		// Mock Object Defined
+		when(jwt.getEmailId(token)).thenReturn(emailId);
+		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
 		
 		if (note.isPin()) {
 			note.setPin(true);
@@ -194,7 +202,10 @@ public class NoteServiceTests {
 	public void testIsTrash() {
 		
 		note.setTrash(true);
-		when(noteRepo.findByIdAndEmailId(noteId, emailId)).thenReturn(note);
+		
+		// Mock Object Defined
+		when(jwt.getEmailId(token)).thenReturn(emailId);
+		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
 	
 		if (note.isTrash()) {
 			note.setTrash(true);
@@ -213,7 +224,10 @@ public class NoteServiceTests {
 	public void testIsArchieve() {
 		
 		note.setArchieve(true);
-		when(noteRepo.findByIdAndEmailId(noteId, emailId)).thenReturn(note);
+		
+		// Mock Object Defined
+		when(jwt.getEmailId(token)).thenReturn(emailId);
+		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
 		
 		if (note.isArchieve()) {
 			note.setArchieve(true);
@@ -272,14 +286,12 @@ public class NoteServiceTests {
 	/**
 	 * Method: Test Case to Add Collaborator
 	 */
-	
 	public void testAddCollaborator() {
 
-		collaboratordto.setCollaboratorEmail(emailId);
-		note.getCollaboratorList().add(emailId);
+		collaboratordto.setCollaboratorEmail(collaboratorEmailId);
 		note.setId(noteId);
-		note.setEmailId(noteId);
 		
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(emailId);
 		when(userRepo.findByEmail(emailId)).thenReturn(user);
 		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
@@ -287,16 +299,18 @@ public class NoteServiceTests {
 		assertTrue(note.getId().equals(noteId));
 
 		assertThat(note.getCollaboratorList().contains(collaboratordto.getCollaboratorEmail()));
-		System.out.println("Coll "+note.getCollaboratorList());
-		assertTrue(collaboratordto.getCollaboratorEmail().equals(note.getEmailId()));
+		if(collaboratordto.getCollaboratorEmail().equals(note.getEmailId())) {
 		
 		note.getCollaboratorList().add(emailId);
 		when(noteRepo.save(note)).thenReturn(note);
 		
+		assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
 		user.getNotelist().add(note);
 		when(userRepo.save(user)).thenReturn(user);
+		
 		Response response = noteService.addCollaborator(noteId, token, collaboratordto);
 		assertEquals(200, response.getStatus());
+		}
 	}
 
 	
@@ -309,6 +323,7 @@ public class NoteServiceTests {
 		collaboratordto.setCollaboratorEmail(emailId);
 		note.getCollaboratorList().add(emailId);
 
+		// Mock Object Defined
 		when(jwt.getEmailId(token)).thenReturn(emailId);
 		when(userRepo.findByEmail(emailId)).thenReturn(user);
 		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
@@ -322,7 +337,7 @@ public class NoteServiceTests {
 			user.getNotelist().add(note);
 			when(userRepo.save(user)).thenReturn(user);
 			
-			Response response = noteService.removeCollaborator(noteId, token, collaboratorEmail);
+			Response response = noteService.removeCollaborator(noteId, token, collaboratorEmailId);
 			assertEquals(200, response.getStatus());
 		}
 	}
@@ -331,37 +346,83 @@ public class NoteServiceTests {
 	/**
 	 * Method: Test Case to Add Reminder
 	 */
-	
+	@Test
 	public void testAddReminder() {
 		
-		int year=2020,month=12,day=23,hour=12,minute=20,second=45;
-		Response response = noteService.addReminder(token, noteId, year, month, day, hour, minute, second);
-		assertEquals(200, response.getStatus());
+		note.setId(noteId);
+		
+		// Mock Object Defined
+		when(jwt.getEmailId(token)).thenReturn(emailId);
+		when(userRepo.findByEmail(emailId)).thenReturn(user);
+		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
+		assertTrue(note.getId().equals(noteId));
+
+		if (note.getReminder() != null) {
+			note.setReminder(reminder);
+			when(noteRepo.save(note));
+
+			assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
+			user.getNotelist().add(note);
+			when(userRepo.save(user)).thenReturn(user);
+
+			Response response = noteService.editReminder(token, noteId, year, month, day, hour, minute, second);
+			assertEquals(200, response.getStatus());
+		}
 	}
 	
 	
 	/**
 	 * Method: Test Case to Edit Reminder
 	 */
-	
+	@Test
 	public void testEditReminder() {
 		
-		int year=2021,month=6,day=12,hour=18,minute=17,second=57;
-		Response response = noteService.editReminder(token, noteId, year, month, day, hour, minute, second);
-		assertEquals(200, response.getStatus());
+		note.setId(noteId);
+		
+		// Mock Object Defined
+		when(jwt.getEmailId(token)).thenReturn(emailId);
+		when(userRepo.findByEmail(emailId)).thenReturn(user);
+		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
+		assertTrue(note.getId().equals(noteId));
+
+		if (note.getReminder() != null) {
+			note.setReminder(reminder);
+			when(noteRepo.save(note));
+
+			assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
+			user.getNotelist().add(note);
+			when(userRepo.save(user)).thenReturn(user);
+
+			Response response = noteService.editReminder(token, noteId, year, month, day, hour, minute, second);
+			assertEquals(200, response.getStatus());
+		}
 	}
 	
 	
 	/**
 	 * Method: Test Case to Remove Reminder 
 	 */
-	
+	@Test
 	public void testRemoveReminder() {
 		
-		String collaboratorEmailId = "demo.mayuresh@gmail.com";
-		Response response = noteService.removeCollaborator(noteId, token, collaboratorEmailId);
-		assertEquals(200,response.getStatus());
-	}
+		note.setId(noteId);
+		
+		// Mock Object Defined
+		when(jwt.getEmailId(token)).thenReturn(emailId);
+		when(userRepo.findByEmail(emailId)).thenReturn(user);
+		when(noteRepo.findById(noteId)).thenReturn(optionalNote);
+		assertTrue(note.getId().equals(noteId));
+		
+		if (note.getReminder() != null) {
+			note.setReminder(null);
+			when(noteRepo.save(note));
 
-	
+			assertThat(user.getNotelist().removeIf(data -> data.getId().equals(note.getId())));
+			user.getNotelist().add(note);
+			when(userRepo.save(user)).thenReturn(user);
+
+			Response response = noteService.removeCollaborator(noteId, token, collaboratorEmailId);
+			assertEquals(200, response.getStatus());
+		}
+	}
 }

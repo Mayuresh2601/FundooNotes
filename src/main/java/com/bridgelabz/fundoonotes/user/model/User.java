@@ -31,7 +31,7 @@ public class User {
 
 	private boolean isValidate;
 
-	List<Note> notelist = new ArrayList<>();
+	private List<Note> notelist = new ArrayList<>();
 	
 	private String profilePicture;
 	

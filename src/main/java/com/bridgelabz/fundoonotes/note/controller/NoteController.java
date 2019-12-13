@@ -38,6 +38,7 @@ public class NoteController {
 	@Autowired
 	private Environment noteEnvironment;
 	
+	
 	/**Method: To create a Note
 	 * @param token
 	 * @param notedto
@@ -273,5 +274,4 @@ public class NoteController {
 		Response response = noteService.removeReminder(token, id);
 		return response;
 	}
-
 }

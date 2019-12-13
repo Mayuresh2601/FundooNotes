@@ -25,6 +25,7 @@ public class Config {
 		return new BCryptPasswordEncoder();
 	}
 	
+	
 	/**Method: To Map the Model with DTO class
 	 * @return Mapping Models
 	 */
@@ -33,5 +34,4 @@ public class Config {
 		
 		return new ModelMapper();
 	}
-
 }
