@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.fundoonotes.label.dto.LabelDTO;
@@ -16,6 +17,7 @@ import com.bridgelabz.fundoonotes.label.service.LabelService;
 import com.bridgelabz.fundoonotes.user.response.Response;
 
 @RestController
+@RequestMapping("/label")
 public class LabelController {
 	
 	@Autowired
@@ -27,7 +29,7 @@ public class LabelController {
 	 * @param labeldto
 	 * @return Create Label implementation Logic
 	 */
-	@PostMapping("/createlabel")
+	@PostMapping("/create")
 	public Response createLabel(@RequestHeader String token, @Valid @RequestBody LabelDTO labeldto) {
 		
 		Response response = service.createLabel(token, labeldto);
@@ -40,7 +42,7 @@ public class LabelController {
 	 * @param labeldto
 	 * @return Update Label implementation Logic
 	 */
-	@PutMapping("/updatelabel")
+	@PutMapping("/update")
 	public Response updateLabel(@RequestHeader String labelid, @RequestHeader String token,@Valid @RequestBody LabelDTO labeldto) {
 		
 		Response response = service.updateLabel(labelid, token, labeldto);
@@ -52,7 +54,7 @@ public class LabelController {
 	 * @param id
 	 * @return Delete Label implementation Logic
 	 */
-	@DeleteMapping("/deletelabel")
+	@DeleteMapping("/delete")
 	public Response deleteLabel(@RequestHeader String labelid, @RequestHeader String token) {
 	
 		Response response = service.deleteLabel(labelid, token);
@@ -64,7 +66,7 @@ public class LabelController {
 	 * @param id
 	 * @return Find Label by Id implementation Logic
 	 */
-	@GetMapping("/labels")
+	@GetMapping("/find")
 	public Response findLabelById(@RequestHeader String labelid, @RequestHeader String token) {
 		
 		Response response = service.findLabelById(labelid, token);
@@ -75,7 +77,7 @@ public class LabelController {
 	/**Method: To Show All Label present in database
 	 * @return Display All Label Implementation Logic
 	 */
-	@GetMapping("/showlabels")
+	@GetMapping("/showall")
 	public Response showLabels() {
 		
 		Response response = service.showLabels();

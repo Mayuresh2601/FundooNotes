@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,7 @@ import com.bridgelabz.fundoonotes.note.service.NoteService;
 import com.bridgelabz.fundoonotes.user.response.Response;
 
 @RestController
+@RequestMapping("/note")
 public class NoteController {
 	
 	@Autowired
@@ -44,8 +46,8 @@ public class NoteController {
 	 * @param notedto
 	 * @return Create Note Implementation Logic
 	 */
-	@PostMapping("/createnote")
-	public Response createNote(@RequestHeader String token,@Valid @RequestBody NoteDTO notedto) {
+	@PostMapping("/create")
+	public Response createNote(@RequestHeader String token, @Valid @RequestBody NoteDTO notedto) {
 		
 		Response response = noteService.createNote(token, notedto);
 		return response;
@@ -57,8 +59,9 @@ public class NoteController {
 	 * @param notedto
 	 * @return Update Note Implementation Logic
 	 */
-	@PutMapping("/updatenote")
-	public Response updateNote(@RequestHeader String id,@RequestHeader String token,@Valid @RequestBody NoteDTO notedto) {
+
+	@PutMapping("/update")
+	public Response updateNote(@RequestHeader String id,@RequestHeader String token, @Valid @RequestBody NoteDTO notedto) {
 		
 		Response response = noteService.updateNote(id, token, notedto);
 		return response;
@@ -69,7 +72,7 @@ public class NoteController {
 	 * @param id
 	 * @return Delete Note Implementation Logic
 	 */
-	@DeleteMapping("/deletenote")
+	@DeleteMapping("/delete")
 	public Response deleteNote(@RequestHeader String id, @RequestHeader String token) {
 		
 		Response response =  noteService.deleteNote(id, token);
@@ -81,7 +84,7 @@ public class NoteController {
 	 * @param id
 	 * @return Find Note By Id Implementation Logic 
 	 */
-	@GetMapping("/notes")
+	@GetMapping("/find")
 	public Response findNoteById(@RequestHeader String id, @RequestHeader String token) {
 		
 		Response response = noteService.findNoteById(id, token);
@@ -92,7 +95,7 @@ public class NoteController {
 	/**Method: To Display All Notes
 	 * @return Display All Notes Implementation Logic
 	 */
-	@GetMapping("/shownotes")
+	@GetMapping("/showall")
 	public Response showNotes() {
 		
 		List<Note> note = noteService.showNotes();
@@ -105,7 +108,7 @@ public class NoteController {
 	 * @param token
 	 * @return Pin/Unpin a Note Implementation Logic
 	 */
-	@PutMapping("/notes/pin")
+	@PutMapping("/pin")
 	public Response isPin(@RequestHeader String id, @RequestHeader String token) {
 		
 		Response response = noteService.isPin(id, token);
@@ -118,7 +121,7 @@ public class NoteController {
 	 * @param token
 	 * @return Trash/Recover a Note Implementation Logic
 	 */
-	@PutMapping("/notes/trash")
+	@PutMapping("/trash")
 	public Response isTrash(@RequestHeader String id, @RequestHeader String token) {
 		
 		Response response = noteService.isTrash(id, token);
@@ -131,7 +134,7 @@ public class NoteController {
 	 * @param token
 	 * @return Archieve/Unarchieve a Note Implementation Logic
 	 */
-	@PutMapping("/notes/archieve")
+	@PutMapping("/archieve")
 	public Response isArchieve(@RequestHeader String id, @RequestHeader String token) {
 		
 		Response response = noteService.isArchieve(id, token);

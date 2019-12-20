@@ -7,6 +7,7 @@
 ******************************************************************************/
 package com.bridgelabz.fundoonotes.user.controller;
 
+
 import java.io.IOException;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +33,7 @@ import com.bridgelabz.fundoonotes.user.response.Response;
 import com.bridgelabz.fundoonotes.user.service.UserService;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
@@ -41,7 +44,7 @@ public class UserController {
 	 * @param regdto
 	 * @return Create User implementation Logic
 	 */
-	@PostMapping("/createuser")
+	@PostMapping("/register")
 	public Response createUser(@Valid @RequestBody RegisterDTO regdto) {
 		
 		Response response = userService.createUser(regdto); 
@@ -53,7 +56,8 @@ public class UserController {
 	 * @param id
 	 * @return Find User by Id implementation Logic
 	 */
-	@GetMapping("/user")
+	
+	@GetMapping("/find")
 	public Response findUser(@RequestHeader String token) {
 		
 		Response response = userService.findUser(token);
@@ -61,12 +65,23 @@ public class UserController {
 	}
 	
 	
+	/**Method: To Show All Users present in database
+	 * @return Display All Users Implementation Logic
+	 */
+	@GetMapping("/showall")
+	public Response showUsers() {
+
+		Response response =  userService.showUsers();
+		return response;
+	}
+
+	
 	/**Method: To Update User in database
 	 * @param regdto
 	 * @param token
 	 * @return Update User Details implementation Logic
 	 */
-	@PutMapping("/updateuser")
+	@PutMapping("/update")
 	public Response updateUser(@Valid @RequestBody UpdateDTO updatedto,@RequestHeader String token) {
 		
 		Response response = userService.updateUser(updatedto, token);
@@ -78,21 +93,10 @@ public class UserController {
 	 * @param id
 	 * @return Delete user Implementation Logic
 	 */
-	@DeleteMapping("/deleteuser")
+	@DeleteMapping("/delete")
 	public Response deleteUser(@RequestHeader String id) {
 		
 		Response response = userService.deleteUser(id);
-		return response;
-	}
-	
-	
-	/**Method: To Show All Users present in database
-	 * @return Display All Users Implementation Logic
-	 */
-	@GetMapping("/showusers")
-	public Response showUsers() {
-
-		Response response =  userService.showUsers();
 		return response;
 	}
 	
@@ -113,7 +117,7 @@ public class UserController {
 	 * @param registerdto
 	 * @return Implementation Logic of forget password
 	 */
-	@PostMapping("/forget")
+	@PostMapping("/forgetpassword")
 	public Response forgetPassword(@Valid @RequestBody ForgetDTO forget) {
 		
 		Response response = userService.forgetPassword(forget);
@@ -126,7 +130,7 @@ public class UserController {
 	 * @param token
 	 * @return Implementation Logic of reset password
 	 */
-	@PostMapping("/reset")
+	@PostMapping("/resetpassword")
 	public Response resetPassword(@Valid @RequestBody ResetDTO reset,@RequestHeader String token) {
 		
 		Response response = userService.resetPassword(reset, token);
@@ -184,5 +188,4 @@ public class UserController {
 		Response response = userService.removeProfilePicture(token);
 		return response;
 	}
-	
 }

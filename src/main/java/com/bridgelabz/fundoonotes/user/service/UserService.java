@@ -184,7 +184,7 @@ public class UserService implements UserServiceI{
 			String token = jwt.createToken(user.getEmail());
 			System.out.println("Recieved token:::::::  "+token);
 			jms.sendMail(user.getEmail(), token);
-			return new Response(200, userEnvironment.getProperty("CHECK_YOUR_MAIL"), userEnvironment.getProperty("CHECK_YOUR_MAIL"));
+			return new Response(200, userEnvironment.getProperty("CHECK_YOUR_MAIL"), null);
 		}	
 		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
@@ -226,8 +226,7 @@ public class UserService implements UserServiceI{
 		if (email.equals(user.getEmail())) {
 			user.setValidate(true);
 			userrepository.save(user);
-			return new Response(200, userEnvironment.getProperty("Verify_User"),
-					userEnvironment.getProperty("VERIFIED_EMAILID_PASSWORD"));
+			return new Response(200, userEnvironment.getProperty("Verify_User"), null);
 		}
 		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
