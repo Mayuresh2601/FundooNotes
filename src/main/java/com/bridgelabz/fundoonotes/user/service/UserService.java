@@ -153,11 +153,10 @@ public class UserService implements UserServiceI{
 		String email = jwt.getEmailId(token);
 		User user = userrepository.findByEmail(email);
 		if(logindto != null) {
-				
 			boolean isValid = bCryptPasswordEncoder.matches(logindto.getPassword(), user.getPassword());
+			boolean isChecker = user.isValidate();
 			
-			if(isValid) {	
-				user.setValidate(true);
+			if(isValid && isChecker) {	
 				userrepository.save(user);
 				return new Response(200, userEnvironment.getProperty("Login"), userEnvironment.getProperty("USER_LOGIN_SUCCESSFUL"));
 			}
