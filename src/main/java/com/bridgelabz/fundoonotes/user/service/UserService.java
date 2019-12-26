@@ -153,13 +153,14 @@ public class UserService implements UserServiceI{
 		String email = jwt.getEmailId(token);
 		User user = userrepository.findByEmail(email);
 		if(logindto != null) {
-			boolean isValid = bCryptPasswordEncoder.matches(logindto.getPassword(), user.getPassword());
+			boolean isValidUsername = logindto.getEmail().equalsIgnoreCase(user.getEmail());
 			boolean isChecker = user.isValidate();
 			
-			if(isValid && isChecker) {	
+			if(isValidUsername && isChecker) {	
 				userrepository.save(user);
 				return new Response(200, userEnvironment.getProperty("Login"), userEnvironment.getProperty("USER_LOGIN_SUCCESSFUL"));
 			}
+			return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 		}
 		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
 	}
@@ -173,19 +174,18 @@ public class UserService implements UserServiceI{
 	public Response forgetPassword(ForgetDTO forget) {
 		
 		List<User> userlist = userrepository.findAll();
-		List<String> email = new ArrayList<>();
+		List<String> userEmails = new ArrayList<>();
 		for (int i = 0; i < userlist.size(); i++) {
-			email.add(userlist.get(i).getEmail());
+			userEmails.add(userlist.get(i).getEmail());
 		}
 		
-		if(email != null) {
+		if(userEmails != null) {
 			User user = mapper.map(forget, User.class);
 			String token = jwt.createToken(user.getEmail());
-			System.out.println("Recieved token:::::::  "+token);
 			jms.sendMail(user.getEmail(), token);
 			return new Response(200, userEnvironment.getProperty("CHECK_YOUR_MAIL"), null);
 		}	
-		return new Response(404, userEnvironment.getProperty("UNAUTHORIZED_USER"), null);
+		return new Response(404, userEnvironment.getProperty("EMAILID_NOT_FOUND"), null);
 	}
 
 	
